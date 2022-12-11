@@ -30,3 +30,7 @@ override.tf.json
 
 # Lambda
 **/dist/*.zip
+
+# NodeJS
+**/node_modules
+package-lock.json
