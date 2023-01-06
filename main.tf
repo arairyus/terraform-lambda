@@ -1,5 +1,5 @@
-module "local_zip_deploy" {
-  source = "./modules/local_zip_deploy"
+module "local_zip_deploy_nodejs" {
+  source = "./modules/nodejs/local_zip_deploy"
 }
 
 module "s3" {
@@ -9,28 +9,27 @@ module "s3" {
   sse_algorithm     = var.sse_algorithm
 }
 
-module "local_zip_s3_deploy" {
-  source      = "./modules/local_zip_s3_deploy"
+module "local_zip_s3_deploy_nodejs" {
+  source      = "./modules/nodejs/local_zip_s3_deploy"
   bucket_name = module.s3.bucket_name
   sse         = var.sse_algorithm
 }
 
-module "local_build_zip_deploy" {
-  source = "./modules/local_build_zip_deploy" 
+module "local_build_zip_deploy_nodejs" {
+  source = "./modules/nodejs/local_build_zip_deploy"
 }
-/*
-module "local_build_zip_s3_deploy" {
-  source      = "./modules/local_build_zip_s3_deploy"
+
+module "local_build_zip_s3_deploy_nodejs" {
+  source      = "./modules/nodejs/local_build_zip_s3_deploy"
   bucket_name = module.s3.bucket_name
   sse         = var.sse_algorithm
 }
-*/
 
 module "nodejs_layer" {
-  source = "./modules/nodejs_layer"
+  source = "./modules/nodejs/nodejs_layer"
 }
 
-module "local_zip_use_layer_deploy" {
-  source = "./modules/local_zip_use_layer_deploy"
+module "local_zip_use_layer_deploy_nodejs" {
+  source       = "./modules/nodejs/local_zip_use_layer_deploy"
   layer_01_arn = module.nodejs_layer.nodejs14_layer_arn
 }
